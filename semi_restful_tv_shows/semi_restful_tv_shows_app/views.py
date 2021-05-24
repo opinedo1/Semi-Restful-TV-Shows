@@ -48,5 +48,7 @@ def update(request, show_id):
     return redirect('/shows')
     
 def delete(request, show_id):
+    if request.method == 'GET':
+        return redirect('/shows')
     Show.objects.get(id=show_id).delete()
     return redirect('/shows')

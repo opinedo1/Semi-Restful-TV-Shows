@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Shows</title>
-    {% comment %}
     {% load static %} 
     <link rel="stylesheet" href="{% static 'style.css'%}">
-    {% endcomment %}
 </head>
 
 <body>
@@ -36,10 +34,13 @@
                             <th>{{ show.title }}</th>
                             <th>{{ show.network }}</th>
                             <th>{{ show.release_date }}</th>
-                            <th>
+                            <th class="d-flex">
                                 <a href="/shows/{{ show.id }}">Show | </a>
                                 <a href="/shows/{{ show.id }}/edit">Edit | </a>
-                                <a href="/shows/{{ show.id }}/delete">Delete</a>
+                                <form action="/shows/{{show.id}}/destroy" method="POST">
+                                    {% csrf_token %}
+                                    <button class="btn btn-link p-0 font-weight-bold" id="link">Delete</button>
+                                </form>
                             </th>
                         </tr>
                         {% endfor %}
