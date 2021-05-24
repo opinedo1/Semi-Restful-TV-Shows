@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Shows</title>
+    {% comment %}
+    {% load static %} 
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    {% endcomment %}
+</head>
+
+<body>
+    <div class="container-flush m-2">
+        <div class="row justify-content-between">
+            <div class="col-8 mr-5">
+                <h1 class="text-dark mb-4">
+                    List of all Shows
+                </h1>      
+                All shows listed on a table here. 
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Network</th>
+                            <th scope="col">Release Date</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for show in shows %}
+                        <tr>
+                            <th>{{ show.id }}</th>
+                            <th>{{ show.title }}</th>
+                            <th>{{ show.network }}</th>
+                            <th>{{ show.release_date }}</th>
+                            <th>
+                                <a href="/shows/{{ show.id }}">Show | </a>
+                                <a href="/shows/{{ show.id }}/edit">Edit | </a>
+                                <a href="/shows/{{ show.id }}/delete">Delete</a>
+                            </th>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
