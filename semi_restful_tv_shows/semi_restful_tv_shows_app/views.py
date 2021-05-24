@@ -47,3 +47,6 @@ def update(request, show_id):
     this_show.save()
     return redirect('/shows')
     
+def delete(request, show_id):
+    Show.objects.get(id=show_id).delete()
+    return redirect('/shows')
