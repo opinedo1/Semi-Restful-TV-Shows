@@ -36,7 +36,6 @@ def new(request):
         if len(errors) > 0:
             for (key, value) in errors.items():
                 messages.error(request, value)
-                print(errors)
             return redirect('/shows/create')
         else:
             Show.objects.create(
@@ -56,7 +55,6 @@ def update(request, show_id):
     if len(errors) > 0:
         for (key, value) in errors.items():
                 messages.error(request, value)
-                print(errors)
         return redirect('/shows/{}/edit'.format(show_id))
     else:
         this_show = Show.objects.get(id=show_id)
