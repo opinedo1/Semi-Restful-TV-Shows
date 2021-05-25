@@ -6,6 +6,7 @@ from django.contrib import messages
 def index(request):
     return redirect('/shows')
 
+# For displaying all the existing shows in our database
 def shows(request):
     context = {
         'shows': Show.objects.all()
@@ -19,13 +20,14 @@ def edit(request, show_id):
     }
     return render(request, 'edit.html', context)
 
+# Displays the content for an existing tv show
 def view(request, show_id):
     context = {
         'show': Show.objects.get(id=show_id)
     }
     return render(request, 'view.html', context)
 
-# Adding form validation to new page
+# Creayes a new show in our database and validates all the fields
 def new(request):
     if request.method == 'GET':
         return render(request, 'new.html')
@@ -41,11 +43,12 @@ def new(request):
                 title = request.POST['title'],
                 network = request.POST['network'],
                 release_date = request.POST['release_date'],
-                description = request.POST['description']  
+                description = request.POST['description']
             )
             show_id = Show.objects.last().id
             return redirect("/shows/{}".format(show_id))
 
+# Updates an existing show and validates data entry
 def update(request, show_id):
     if request.method == 'GET':
         return redirect('/shows')
@@ -63,7 +66,8 @@ def update(request, show_id):
         this_show.description = request.POST['description']
         this_show.save()
         return redirect('/shows')
-    
+
+# Deletes a single show that is selected
 def delete(request, show_id):
     if request.method == 'GET':
         return redirect('/shows')
